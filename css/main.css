@@ -1,0 +1,553 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    350deg,
+    hsl(240deg 93% 52%) 0%,
+    hsl(223deg 100% 50%) 5%,
+    hsl(217deg 100% 50%) 11%,
+    hsl(212deg 100% 50%) 19%,
+    hsl(208deg 100% 50%) 27%,
+    hsl(204deg 100% 50%) 39%,
+    hsl(201deg 100% 50%) 61%,
+    hsl(197deg 100% 49%) 87%,
+    hsl(192deg 100% 47%) 95%,
+    hsl(189deg 79% 56%) 100%
+  );
+}
+
+.alret-massage {
+  position: absolute;
+  width: 325px;
+  height: 87px;
+  font-size: 18px;
+  background: white;
+  color: red;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 38px;
+  opacity: 0;
+}
+
+.alret-massage.active {
+  animation: alret-massage 1s linear 1;
+}
+
+.task-detail {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.199);
+  z-index: 1055;
+  display: none;
+  opacity: 0;
+  transition: 1s;
+}
+
+.task-detail .container-task {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
+  border-radius: 6px;
+  min-width: 250px;
+}
+
+.task-detail .container-task .title {
+  padding: 20px;
+  border-bottom: 1px solid rgb(126, 123, 123);
+  display: flex;
+  justify-content: space-between;
+}
+.task-detail .container-task .info-description {
+  padding: 20px;
+}
+.info-description .text-description {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.task-detail .type-task {
+  padding: 20px;
+  border-top: 1px solid rgb(160, 153, 153);
+}
+
+.task-detail .info-type {
+  padding: 10px;
+  background-color: #0ec4fc;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.properties {
+  background-color: rgba(0, 0, 0, 0.192);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  opacity: 0;
+  transition: 1s;
+}
+.pop-up.active {
+  pointer-events: none;
+}
+
+.box-properties {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.144);
+  border-radius: 6px;
+  width: 400px;
+  transform: scale(0);
+  transition: 1s;
+}
+
+.box-properties .head {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.096);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.box-properties .body {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+.close {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.box-properties .body .main-Choices {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  text-align: center;
+  color: #556eff;
+  padding: 20px 0;
+}
+
+.box-properties .body .main-Choices > div {
+  flex: 1;
+  background-color: white;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.116);
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.box-properties .body .main-Choices > div:hover {
+  background-color: #6075f0;
+  color: white;
+  letter-spacing: 3px;
+}
+
+.box-properties .body .main-Choices > div.active {
+  background-color: #6075f0;
+  color: white;
+}
+
+.con-priority {
+  overflow: hidden;
+  height: 0;
+
+  transition: 0.3s;
+}
+
+.con-priority .title {
+  margin-bottom: 15px;
+}
+.con-priority .priority > div {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.con-priority .priority > div:first-of-type {
+  background-color: #f8ddd7;
+  color: red;
+}
+.con-priority .priority > div:first-of-type:hover {
+  background-color: #ec2d06;
+  color: white;
+}
+.con-priority .priority > div:first-of-type.active {
+  background-color: #ec2d06;
+  color: white;
+}
+
+.con-priority .priority > div:nth-of-type(2) {
+  background-color: rgb(250, 204, 231);
+  color: rgb(146, 51, 106);
+}
+
+.con-priority .priority > div:nth-of-type(2):hover {
+  background-color: rgb(168, 34, 135);
+  color: white;
+}
+
+.con-priority .priority > div:nth-of-type(2).active {
+  background-color: rgb(168, 34, 135);
+  color: white;
+}
+
+.con-priority .priority > div:nth-of-type(3) {
+  background-color: rgb(213, 247, 213);
+  color: green;
+}
+
+.con-priority .priority > div:nth-of-type(3):hover {
+  background-color: green;
+  color: white;
+}
+.con-priority .priority > div:nth-of-type(3).active {
+  background-color: green;
+  color: white;
+}
+
+.con-description {
+  background-color: white;
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.con-description textarea {
+  width: 100%;
+  outline: none;
+  resize: none;
+  padding: 10px;
+  height: 150px;
+  border: none;
+}
+
+.type {
+  margin-top: 30px;
+}
+
+.type > div {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.type > div:first-of-type {
+  background-color: rgb(230 245 224);
+}
+.type > div:first-of-type:hover {
+  background-color: rgb(79, 238, 16);
+  color: white;
+}
+.type > div:first-of-type.active {
+  background-color: rgb(79, 238, 16);
+  color: white;
+}
+.type > div:nth-of-type(2) {
+  background-color: #d6e9ef;
+}
+.type > div:nth-of-type(2):hover {
+  background-color: #0ec4fc;
+  color: white;
+}
+.type > div:nth-of-type(2).active {
+  background-color: #0ec4fc;
+  color: white;
+}
+.type > div:nth-of-type(3) {
+  background-color: rgb(209 105 125 / 47%);
+}
+.type > div:nth-of-type(3):hover {
+  background-color: rgba(253, 29, 74, 1);
+  color: white;
+}
+.type > div:nth-of-type(3).active {
+  background-color: rgba(253, 29, 74, 1);
+  color: white;
+}
+
+.add {
+  padding: 10px;
+  background-color: #343a3a;
+  color: white;
+  width: fit-content;
+  margin: 10px 20px 10px auto;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.add:hover {
+  background-color: #55e2e2;
+}
+
+.main {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+  padding: 20px;
+  border-radius: 6px;
+  width: 80%;
+  overflow: auto;
+}
+.contianer {
+  min-width: 700px;
+}
+.main .title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+.analyzing {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.analyzing > div {
+  padding: 4px;
+  border-radius: 3px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.analyzing .total {
+  background-color: #d9defa;
+  color: #556eff;
+}
+.analyzing .success {
+  background-color: #b5f3e1b2;
+  color: #012219b2;
+}
+.analyzing .pending {
+  background-color: #f8ddd7;
+  color: #fc3002;
+}
+.input {
+  display: flex;
+  margin-top: 25px;
+  border-bottom: 2px solid rgb(74, 169, 233);
+}
+.input input {
+  outline: none;
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 17px;
+}
+.input i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.input i:hover {
+  color: #fc3002;
+}
+.tesks {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  max-height: 520px;
+  overflow: auto;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  cursor: pointer;
+}
+.no-task {
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.task::after {
+  content: "Double Click to Show Detalis";
+  position: absolute;
+  background-color: rgba(107, 102, 102, 0.61);
+  top: 0px;
+  left: 50%;
+  color: rgba(238, 238, 238, 0.705);
+  border-radius: 3px;
+  transition: 0.3s;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.task:hover {
+  background-color: #eee;
+}
+
+.task:hover::after {
+  animation: opacityy 2s ease-in-out;
+}
+.task .task-name {
+  color: rgb(197, 188, 188);
+  font-weight: 500;
+  font-size: 18px;
+  width: 60%;
+  padding-right: 40px;
+  word-wrap: break-word;
+}
+
+.task .task-name.active {
+  text-decoration-line: line-through;
+}
+
+.task .status {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: #343a3a;
+  flex: 2;
+}
+
+.task .color {
+  padding: 7px;
+  background-color: #eb6c3a;
+  border-radius: 50%;
+}
+
+.task .color.high {
+  background-color: red;
+}
+.task .color.medium {
+  background-color: rgb(168, 34, 135);
+}
+.task .color.low {
+  background-color: green;
+}
+
+.task .date {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  flex: 2;
+}
+
+.task .date {
+  flex: 2;
+}
+
+.task .date i {
+  font-size: 20px;
+}
+
+.delete-all {
+  color: white;
+  display: flex;
+  cursor: pointer;
+  gap: 5px;
+  width: fit-content;
+  background-color: #343a3a;
+  padding: 10px;
+  position: relative;
+  z-index: 666;
+}
+.delete-all * {
+  position: relative;
+  z-index: -1;
+}
+
+.delete-all:hover {
+  background-color: #599191;
+}
+
+.tesks .delete {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tesks .delete i {
+  font-size: 25px;
+  cursor: pointer;
+  color: #3a8deb;
+}
+
+.tesks .delete input {
+  font-size: 40px;
+  display: block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  border: 0.15em solid firebrick;
+  color: #3a8deb;
+  background-color: #eb6c3a;
+}
+
+.tesks input[type="checkbox"]::before {
+  background-color: #eb6c3a;
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history {
+  color: white;
+  display: flex;
+  cursor: pointer;
+  gap: 5px;
+  width: fit-content;
+  background-color: #343a3a;
+  padding: 10px;
+}
+
+.history:hover {
+  background-color: #599191;
+}
+
+@keyframes opacityy {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes alret-massage {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
